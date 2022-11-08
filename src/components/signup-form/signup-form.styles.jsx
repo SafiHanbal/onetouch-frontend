@@ -1,6 +1,6 @@
 import { Button, styled, TextField } from '@mui/material';
 
-export const Input = styled(TextField)`
+export const CustomizedTextField = styled(TextField)`
   display: block;
 
   & .MuiInputBase-root {
@@ -18,6 +18,5 @@ export const UploadButton = styled(Button)`
 
 export const SubmitButton = styled(Button)`
   width: 100%;
-  background-color: var(--color-secondary);
   margin-top: 10px;
 `;

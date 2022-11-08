@@ -8,7 +8,7 @@ import {
   AuthLink,
   FormContainer,
   Logo,
-  LogoContaner,
+  LogoContainer,
   TabContainer,
 } from './authentication.styles';
 
@@ -23,9 +23,9 @@ const Authentication = () => {
 
   return (
     <AuthenticationContainer disableGutters maxWidth="sm">
-      <LogoContaner>
-        <Logo>One Touch</Logo>
-      </LogoContaner>
+      <LogoContainer>
+        <Logo variant="p">One Touch</Logo>
+      </LogoContainer>
       <FormContainer>
         <TabContainer>
           <AuthLink

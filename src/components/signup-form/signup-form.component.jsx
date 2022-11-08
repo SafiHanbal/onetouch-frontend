@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Input } from '../login-form/login-form.styles';
+import { CustomizedTextField } from './signup-form.styles';
 import PasswordInput from '../password-input/password-input.component';
 import { SubmitButton, UploadButton } from './signup-form.styles';
 
@@ -22,11 +22,9 @@ const SignUpForm = () => {
     else setFormFields({ ...formFields, pic: event.target.files[0] });
   };
 
-  console.log(formFields);
-
   return (
     <form>
-      <Input
+      <CustomizedTextField
         variant="standard"
         label="Name"
         name="name"
@@ -34,7 +32,7 @@ const SignUpForm = () => {
         value={name}
         onChange={handleOnChange}
       />
-      <Input
+      <CustomizedTextField
         variant="standard"
         label="Email"
         name="email"

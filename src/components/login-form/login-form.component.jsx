@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
-import { Form, Input, SubmitButton } from './login-form.styles';
+import { Form, CustomizedTextField, SubmitButton } from './login-form.styles';
 import PasswordInput from '../password-input/password-input.component';
+
+import { apiRequest } from '../../utils/api-request';
 
 const defaultFormFields = {
   email: '',
@@ -18,9 +20,13 @@ const LoginForm = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
+  const handleOnSubmit = async (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <Form>
-      <Input
+    <Form onSubmit={handleOnSubmit}>
+      <CustomizedTextField
         variant="standard"
         label="Email"
         name="email"
@@ -36,7 +42,9 @@ const LoginForm = () => {
         onChange={handleOnChange}
       />
 
-      <SubmitButton variant="contained">Login</SubmitButton>
+      <SubmitButton variant="contained" type="submit">
+        Login
+      </SubmitButton>
     </Form>
   );
 };

@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { IconButton, InputLabel, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-import { FormInput, FormInputControl } from './password-input.styles';
+import {
+  CustomizedFormControl,
+  CustomizedInput,
+} from './password-input.styles';
 
 export default function InputAdornments({ id, name, label, value, onChange }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,9 +20,9 @@ export default function InputAdornments({ id, name, label, value, onChange }) {
   };
 
   return (
-    <FormInputControl variant="standard">
+    <CustomizedFormControl variant="standard">
       <InputLabel htmlFor={id}>{label}</InputLabel>
-      <FormInput
+      <CustomizedInput
         id={id}
         name={name}
         type={showPassword ? 'text' : 'password'}
@@ -37,6 +40,6 @@ export default function InputAdornments({ id, name, label, value, onChange }) {
           </InputAdornment>
         }
       />
-    </FormInputControl>
+    </CustomizedFormControl>
   );
 }
