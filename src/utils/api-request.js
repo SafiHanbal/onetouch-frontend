@@ -1,3 +1,5 @@
+import { store } from '../store/store';
+
 export const API_REQ_TYPES = {
   GET: 'GET',
   POST: 'POST',
@@ -6,7 +8,7 @@ export const API_REQ_TYPES = {
 };
 
 export const apiRequest = async (
-  url,
+  endpoint,
   method = API_REQ_TYPES.GET,
   body,
   isFormData
@@ -26,7 +28,14 @@ export const apiRequest = async (
     };
     options.body = JSON.stringify(body);
   }
-  console.log(options);
+
+  const { user } = store.getState().user;
+  if (user?.token) {
+    options.headers.Authorization = `Bearer ${user.token}`;
+  }
+
+  const host = 'http://127.0.0.1:8000/';
+  const url = `${host}${endpoint}`;
 
   const req = await fetch(url, options);
   return await req.json();

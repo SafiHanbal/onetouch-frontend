@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Form, CustomizedTextField, SubmitButton } from './login-form.styles';
 import PasswordInput from '../password-input/password-input.component';
 
-import { apiRequest } from '../../utils/api-request';
+import { loginUserAsync } from '../../store/user/user-action';
 
 const defaultFormFields = {
   email: '',
@@ -11,6 +12,8 @@ const defaultFormFields = {
 };
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   const { email, password } = formFields;
@@ -22,6 +25,7 @@ const LoginForm = () => {
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
+    dispatch(loginUserAsync(formFields));
   };
 
   return (
