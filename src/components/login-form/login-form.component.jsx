@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { Form, CustomizedTextField, SubmitButton } from './login-form.styles';
 import PasswordInput from '../password-input/password-input.component';

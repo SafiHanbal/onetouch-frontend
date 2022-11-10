@@ -1,7 +1,11 @@
-import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import LoginForm from '../../components/login-form/login-form.component';
 import SignUpForm from '../../components/signup-form/signup-form.component';
+
+import { selectUser } from '../../store/user/user-selector';
 
 import {
   AuthenticationContainer,
@@ -13,6 +17,9 @@ import {
 } from './authentication.styles';
 
 const Authentication = () => {
+  const naviagte = useNavigate();
+  const user = useSelector(selectUser);
+
   const [activeTab, setActiveTab] = useState(
     window.location.href.includes('/signup') ? 'signup' : 'login'
   );
@@ -20,6 +27,11 @@ const Authentication = () => {
   const handleOnClick = (event) => {
     setActiveTab(event.target.name);
   };
+
+  useEffect(() => {
+    if (user) naviagte('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <AuthenticationContainer disableGutters maxWidth="sm">

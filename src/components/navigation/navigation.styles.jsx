@@ -1,4 +1,5 @@
 import { styled } from '@mui/material';
+import { Box } from '@mui/material';
 
 export const NavigationContainer = styled('div')`
   display: flex;
@@ -20,4 +21,14 @@ export const Logo = styled('p')`
   letter-spacing: -1px;
   line-height: 1;
   text-shadow: 0 2px 2px rgba(var(--color-black-rgb), 0.3);
+`;
+
+export const AvatarContainer = styled(Box)`
+  text-align: center;
+  display: inline-block;
+`;
+
+export const RightNavContainer = styled(Box)`
+  display: flex;
+  align-items: center;
 `;

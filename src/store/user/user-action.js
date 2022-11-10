@@ -41,7 +41,7 @@ export const logoutFailed = (payload) =>
 export const logoutUserAsync = () => async (dispatch) => {
   dispatch(logoutStart());
   try {
-    const data = await apiRequest('api/v1/logout');
+    const data = await apiRequest('api/v1/user/logout');
 
     if (data.status !== 'success') throw new Error(data.message);
     dispatch(loginSucess(null));
