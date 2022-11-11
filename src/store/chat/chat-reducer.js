@@ -51,6 +51,22 @@ export const chatReducer = (state = CHAT_INITIAL_STATE, action) => {
         isLoading: false,
         error: payload,
       };
+    case CHAT_ACTION_TYPES.CREATE_GROUP_CHAT_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case CHAT_ACTION_TYPES.CREATE_GROUP_CHAT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case CHAT_ACTION_TYPES.CREATE_GROUP_CHAT_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+      };
+
     default:
       return state;
   }

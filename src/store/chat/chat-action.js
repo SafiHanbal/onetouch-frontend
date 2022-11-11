@@ -50,3 +50,27 @@ export const accessChatAsync = (userId) => async (dispatch) => {
     dispatch(accessChatFailed(err));
   }
 };
+
+export const createGroupChatStart = (payload) =>
+  createAction(CHAT_ACTION_TYPES.CREATE_GROUP_CHAT_START, payload);
+
+export const createGroupChatSuccess = (payload) =>
+  createAction(CHAT_ACTION_TYPES.CREATE_GROUP_CHAT_SUCCESS, payload);
+
+export const createGroupChatFailed = (payload) =>
+  createAction(CHAT_ACTION_TYPES.CREATE_GROUP_CHAT_FAILED, payload);
+
+export const createGroupChatAsync = (body) => async (dispatch) => {
+  dispatch(createGroupChatStart());
+  try {
+    const data = await apiRequest(
+      'api/v1/chat/group',
+      API_REQ_TYPES.POST,
+      body
+    );
+    if (data.status !== 'success') throw new Error(data.message);
+    dispatch(getMyChatsAsync());
+  } catch (err) {
+    dispatch(createGroupChatFailed(err));
+  }
+};

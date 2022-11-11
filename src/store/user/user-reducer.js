@@ -4,9 +4,6 @@ const USER_INITIAL_STATE = {
   isLoading: false,
   user: null,
   error: null,
-  usersLoading: false,
-  users: null,
-  usersError: null,
 };
 
 export const userReducer = (state = USER_INITIAL_STATE, action) => {

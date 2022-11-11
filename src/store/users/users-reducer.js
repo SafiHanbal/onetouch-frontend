@@ -4,6 +4,9 @@ const USER_INITIAL_STATE = {
   isLoading: false,
   users: [],
   error: null,
+  groupChatUsersLoading: false,
+  groupChatUsers: [],
+  groupChatUsersError: null,
 };
 
 export const usersReducer = (state = USER_INITIAL_STATE, action) => {
@@ -26,6 +29,28 @@ export const usersReducer = (state = USER_INITIAL_STATE, action) => {
         ...state,
         isLoading: false,
         error: payload,
+      };
+    case USERS_ACTION_TYPES.GROUP_CHAT_USERS_SEARCH_START:
+      return {
+        ...state,
+        groupChatUsersLoading: true,
+      };
+    case USERS_ACTION_TYPES.GROUP_CHAT_USERS_SEARCH_SUCCESS:
+      return {
+        ...state,
+        groupChatUsersLoading: false,
+        groupChatUsers: payload,
+      };
+    case USERS_ACTION_TYPES.GROUP_CHAT_USERS_SEARCH_FAILED:
+      return {
+        ...state,
+        groupChatUsersLoading: false,
+        groupChatUsersError: payload,
+      };
+    case USERS_ACTION_TYPES.CLEAR_GROUP_CHAT_USER:
+      return {
+        ...state,
+        groupChatUsers: [],
       };
 
     default:

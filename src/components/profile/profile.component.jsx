@@ -12,7 +12,11 @@ import {
 import { Logout } from '@mui/icons-material';
 
 import UserModal from '../user-modal/user-modal.component';
-import { AvatarContainer, ProfileContainer } from './profile.styles';
+import {
+  AvatarContainer,
+  CustomizedAvatar,
+  ProfileContainer,
+} from './profile.styles';
 
 import { logoutUserAsync } from '../../store/user/user-action';
 import { selectUser } from '../../store/user/user-selector';
@@ -49,7 +53,9 @@ const Profile = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar>{user?.name?.split('')[0].toUpperCase()}</Avatar>
+            <CustomizedAvatar>
+              {user?.name?.split('')[0].toUpperCase()}
+            </CustomizedAvatar>
           </IconButton>
         </Tooltip>
       </AvatarContainer>
