@@ -9,7 +9,7 @@ const UserCardSkeleton = () => {
     <SkeletonContainer>
       <ImageSkeleton variant="circular" />
       <TextSkeleton variant="rectangular" />
-      <TextSkeleton variant="rectangular" mini={true} />
+      <TextSkeleton variant="rectangular" mini="yes" />
     </SkeletonContainer>
   );
 };

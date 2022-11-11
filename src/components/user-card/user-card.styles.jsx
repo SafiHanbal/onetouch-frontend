@@ -2,12 +2,9 @@ import { styled, Box, Avatar, Typography } from '@mui/material';
 
 export const CardContainer = styled(Box)`
   display: grid;
-  grid-template-columns: ${({ addUser }) => (addUser ? '40px' : '50px')} 1fr;
-  grid-template-rows: repeat(
-    2,
-    ${({ addUser }) => (addUser ? '16px' : '20px')}
-  );
-  grid-gap: ${({ addUser }) => (addUser ? '6px' : '10px')};
+  grid-template-columns: ${({ mini }) => (mini ? '40px' : '50px')} 1fr;
+  grid-template-rows: repeat(2, ${({ mini }) => (mini ? '16px' : '20px')});
+  grid-gap: ${({ mini }) => (mini ? '6px' : '10px')};
 
   padding: 10px 15px;
   cursor: pointer;
@@ -20,16 +17,18 @@ export const CardContainer = styled(Box)`
 export const CustomizedAvatar = styled(Avatar)`
   background-color: var(--color-secondary);
   font-weight: 400;
-  height: ${({ addUser }) => (addUser ? '40px' : '50px')};
-  width: ${({ addUser }) => (addUser ? '40px' : '50px')};
+  height: ${({ mini }) => (mini ? '40px' : '50px')};
+  width: ${({ mini }) => (mini ? '40px' : '50px')};
 `;
 
 export const Name = styled(Typography)`
-  font-size: ${({ addUser }) => (addUser ? '14px' : '16px')};
+  font-size: ${({ mini }) => (mini ? '14px' : '16px')};
   grid-column: 2/3;
 `;
 
 export const Text = styled(Typography)`
-  font-size: ${({ addUser }) => (addUser ? '12px' : '14px')};
+  font-size: ${({ mini }) => (mini ? '12px' : '14px')};
   grid-column: 2/3;
+  margin-top: -6px;
+  color: var(--color-gray-dark-1);
 `;

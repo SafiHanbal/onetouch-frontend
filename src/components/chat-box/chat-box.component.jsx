@@ -1,9 +1,22 @@
-import { ChatBoxContainer } from './chat-box.styles';
+import { useSelector } from 'react-redux';
+
+import { ChatBoxContainer, NoSelectedChatMessage } from './chat-box.styles';
+
+import { selectSelectedChat } from '../../store/chat/chat-selector';
+import Chat from '../chat/chat.component';
 
 const ChatBox = () => {
+  const selectedChat = useSelector(selectSelectedChat);
+
   return (
     <ChatBoxContainer>
-      <h1>Chat Box</h1>
+      {selectedChat ? (
+        <Chat chat={selectedChat} />
+      ) : (
+        <NoSelectedChatMessage variant="h6">
+          No selected chats. Click on a user to start chatting.
+        </NoSelectedChatMessage>
+      )}
     </ChatBoxContainer>
   );
 };

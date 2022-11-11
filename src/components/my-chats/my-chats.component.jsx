@@ -5,6 +5,7 @@ import { Add } from '@mui/icons-material';
 import { Typography, Button } from '@mui/material';
 
 import { getMyChatsAsync } from '../../store/chat/chat-action';
+import { clearGroupChatUsers } from '../../store/users/users-action';
 import { selectMyChats } from '../../store/chat/chat-selector';
 import { selectUser } from '../../store/user/user-selector';
 
@@ -19,7 +20,10 @@ const MyChat = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalOpen = () => setIsModalOpen(true);
-  const handleModalClose = () => setIsModalOpen(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    dispatch(clearGroupChatUsers());
+  };
 
   useEffect(() => {
     dispatch(getMyChatsAsync());
@@ -38,13 +42,7 @@ const MyChat = () => {
         {chats.length &&
           chats.map((chat) => {
             if (chat.isGroupChat) {
-              return (
-                <UserCard
-                  key={chat._id}
-                  groupName={chat.chatName}
-                  isGroupChat={true}
-                />
-              );
+              return <UserCard key={chat._id} chat={chat} isGroupChat={true} />;
             } else {
               const secondUser = chat.users.filter(
                 (el) => user._id !== el._id
@@ -54,6 +52,7 @@ const MyChat = () => {
                   key={secondUser._id}
                   user={secondUser}
                   isChat={true}
+                  chat={chat}
                 />
               );
             }

@@ -1,6 +1,6 @@
 import { UserBadgeContainer, Name, CloseIcon } from './user-badge.styles';
 
-const UserBadge = ({ user, removeUser }) => {
+const UserBadge = ({ user, removeUser, isAdmin = true }) => {
   const handleOnClick = () => {
     removeUser(user);
   };
@@ -8,7 +8,7 @@ const UserBadge = ({ user, removeUser }) => {
   return (
     <UserBadgeContainer variant="contained">
       <Name>{user.name}</Name>
-      <CloseIcon onClick={handleOnClick} />
+      {isAdmin && <CloseIcon onClick={handleOnClick} />}
     </UserBadgeContainer>
   );
 };

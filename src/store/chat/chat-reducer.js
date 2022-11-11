@@ -2,10 +2,9 @@ import CHAT_ACTION_TYPES from './chat-types';
 
 const CHAT_INITIAL_STATE = {
   myChats: [],
-  slelectedUser: null,
+  selectedChat: null,
   isLoading: true,
   error: null,
-  accessChat: null,
 };
 
 export const chatReducer = (state = CHAT_INITIAL_STATE, action) => {
@@ -29,10 +28,10 @@ export const chatReducer = (state = CHAT_INITIAL_STATE, action) => {
         isLoading: false,
         error: payload,
       };
-    case CHAT_ACTION_TYPES.SET_SELECTED_USER:
+    case CHAT_ACTION_TYPES.SET_SELECTED_CHAT:
       return {
         ...state,
-        slelectedUser: payload,
+        selectedChat: payload,
       };
     case CHAT_ACTION_TYPES.ACCESS_CHAT_START:
       return {
@@ -43,7 +42,6 @@ export const chatReducer = (state = CHAT_INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: false,
-        accessChat: payload,
       };
     case CHAT_ACTION_TYPES.ACCESS_CHAT_FAILED:
       return {

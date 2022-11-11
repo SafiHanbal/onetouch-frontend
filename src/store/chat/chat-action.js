@@ -23,8 +23,8 @@ export const getMyChatsAsync = () => async (dispatch) => {
   }
 };
 
-export const setSelectedUser = (payload) =>
-  createAction(CHAT_ACTION_TYPES.SET_SELECTED_USER, payload);
+export const setSelectedChat = (payload) =>
+  createAction(CHAT_ACTION_TYPES.SET_SELECTED_CHAT, payload);
 
 export const accessChatStart = (payload) =>
   createAction(CHAT_ACTION_TYPES.ACCESS_CHAT_START, payload);
@@ -43,8 +43,8 @@ export const accessChatAsync = (userId) => async (dispatch) => {
     });
     if (data.status !== 'success') throw new Error(data.message);
     const { chat } = data.data;
-    dispatch(accessChatSuccess(chat));
-    dispatch(setSelectedUser(chat.users.filter((user) => user._id === userId)));
+    dispatch(accessChatSuccess());
+    dispatch(setSelectedChat(chat));
     dispatch(getMyChatsAsync());
   } catch (err) {
     dispatch(accessChatFailed(err));
@@ -72,5 +72,64 @@ export const createGroupChatAsync = (body) => async (dispatch) => {
     dispatch(getMyChatsAsync());
   } catch (err) {
     dispatch(createGroupChatFailed(err));
+  }
+};
+
+export const changeGroupName = (payload) =>
+  createAction(CHAT_ACTION_TYPES.CHANGE_GROUP_NAME, payload);
+
+export const changeGroupNameAsync = (body) => async (dispatch) => {
+  try {
+    const data = await apiRequest(
+      'api/v1/chat/rename',
+      API_REQ_TYPES.PATCH,
+      body
+    );
+    if (data.status !== 'success') throw new Error(data.message);
+    const { groupChat } = data.data;
+    dispatch(setSelectedChat(groupChat));
+    dispatch(getMyChatsAsync());
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+export const addUserToGroup = (payload) =>
+  createAction(CHAT_ACTION_TYPES.ADD_USER_TO_GROUP, payload);
+
+export const addUserToGroupAsync = (body) => async (dispatch) => {
+  try {
+    const data = await apiRequest(
+      'api/v1/chat/add-to-group',
+      API_REQ_TYPES.PATCH,
+      body
+    );
+
+    if (data.status !== 'success') throw new Error(data.message);
+    const { groupChat } = data.data;
+    dispatch(setSelectedChat(groupChat));
+    dispatch(getMyChatsAsync());
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+export const removeUserFromGroup = (payload) =>
+  createAction(CHAT_ACTION_TYPES.REMOVE_USER_FROM_GROUP, payload);
+
+export const removeUserFromGroupAsync = (body) => async (dispatch) => {
+  try {
+    const data = await apiRequest(
+      'api/v1/chat/remove-from-group',
+      API_REQ_TYPES.PATCH,
+      body
+    );
+
+    if (data.status !== 'success') throw new Error(data.message);
+    const { groupChat } = data.data;
+    dispatch(setSelectedChat(groupChat));
+    dispatch(getMyChatsAsync());
+  } catch (err) {
+    console.error(err.message);
   }
 };

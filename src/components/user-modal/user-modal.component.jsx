@@ -9,13 +9,12 @@ import {
 } from './user-modal.styles';
 
 const UserModal = ({ isModalOpen, handleCloseModal, user }) => {
-  const { name, image, email } = user;
   return (
     <Modal open={isModalOpen} onClose={handleCloseModal}>
       <ModalContainer>
-        <Name>{name}</Name>
-        <CustomizedAvatar src={image} />
-        <Email>email: {email}</Email>
+        <Name>{user?.name}</Name>
+        <CustomizedAvatar src={user?.image} />
+        <Email>email: {user?.email}</Email>
         <CloseButton variant="contained" onClick={handleCloseModal}>
           Close
         </CloseButton>

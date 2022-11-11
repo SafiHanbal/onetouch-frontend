@@ -53,8 +53,8 @@ const GroupChatModal = ({ isModalOpen, handleModalClose }) => {
 
   const handleUserNameOnChange = (event) => {
     setUserName(event.target.value);
-    if (!event.target.value) return dispatch(clearGroupChatUsers());
     clearTimeout(timer);
+    if (!event.target.value) return dispatch(clearGroupChatUsers());
     setTimer(
       setTimeout(() => {
         dispatch(groupChatUserSearchAsync(event.target.value));
@@ -69,6 +69,7 @@ const GroupChatModal = ({ isModalOpen, handleModalClose }) => {
     if (userExits) return;
     setGroupChatUser([...groupChatUser, user]);
   };
+
   const removeUser = (user) => {
     setGroupChatUser(
       groupChatUser.filter((chatUser) => chatUser._id !== user._id)
