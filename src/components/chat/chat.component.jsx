@@ -11,6 +11,7 @@ import UpdateGroupModal from '../update-group-modal/update-group-modal.component
 
 import { clearGroupChatUsers } from '../../store/users/users-action';
 import { selectUser } from '../../store/user/user-selector';
+import MessageBox from '../message-box/message-box.component';
 
 const Chat = ({ chat }) => {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const Chat = ({ chat }) => {
           <Visibility />
         </CustomizedButton>
       </Header>
+      <MessageBox />
       {chat.isGroupChat ? (
         <UpdateGroupModal
           chat={chat}
@@ -53,7 +55,7 @@ const Chat = ({ chat }) => {
         <UserModal
           isModalOpen={isModalOpen}
           handleCloseModal={handleCloseModal}
-          user={chat}
+          user={chat.users.filter((chatUser) => chatUser._id !== user._id)[0]}
         />
       )}
     </>
