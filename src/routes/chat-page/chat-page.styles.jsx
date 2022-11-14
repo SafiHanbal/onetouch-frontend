@@ -12,4 +12,8 @@ export const ChatContainer = styled(Box)`
   top: 80px;
   left: 0;
   bottom: 0;
+
+  @media only screen and (max-width: 900px) {
+    display: block;
+  }
 `;

@@ -2,6 +2,10 @@ import { styled, Box, TextField } from '@mui/material';
 
 export const SideDrawerContainer = styled(Box)`
   width: 350px;
+
+  @media only screen and (max-width: 400px) {
+    width: 270px;
+  }
 `;
 
 export const Form = styled('form')`

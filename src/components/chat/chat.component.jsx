@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Typography } from '@mui/material';
-import { Visibility } from '@mui/icons-material';
+import { Button, Typography, useMediaQuery } from '@mui/material';
+import { Visibility, ArrowBack } from '@mui/icons-material';
 
 import { CustomizedButton, Header } from './chat.styles';
 
@@ -12,10 +12,12 @@ import UpdateGroupModal from '../update-group-modal/update-group-modal.component
 import { clearGroupChatUsers } from '../../store/users/users-action';
 import { selectUser } from '../../store/user/user-selector';
 import MessageBox from '../message-box/message-box.component';
+import { setSelectedChat } from '../../store/chat/chat-action';
 
 const Chat = ({ chat }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const tabView = useMediaQuery('(max-width: 900px)');
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
@@ -28,9 +30,19 @@ const Chat = ({ chat }) => {
     dispatch(clearGroupChatUsers());
   };
 
+  const handleOnClick = (event) => {
+    event.preventDefault();
+    dispatch(setSelectedChat(null));
+  };
+
   return (
     <>
       <Header>
+        {tabView && (
+          <Button variant="contained" onClick={handleOnClick}>
+            <ArrowBack />
+          </Button>
+        )}
         <Typography variant="h5">
           {chat.isGroupChat
             ? chat.chatName

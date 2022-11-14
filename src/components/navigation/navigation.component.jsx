@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Box, Button, Tooltip, Typography } from '@mui/material';
+import { Box, Button, Tooltip, Typography, useMediaQuery } from '@mui/material';
 import { Search } from '@mui/icons-material';
 
 import Notification from '../notification/notification.component';
@@ -15,6 +15,7 @@ import {
 
 const Navigation = () => {
   const [isActive, setIsActive] = useState(false);
+  const tabView = useMediaQuery('(max-width: 900px)');
 
   const toggleDrawer = (event) => {
     if (
@@ -35,7 +36,7 @@ const Navigation = () => {
         <Tooltip title="Search Users to chat" arrow>
           <Button variant="text" onClick={toggleDrawer}>
             <Search />
-            <Typography variant="">Search User</Typography>
+            {!tabView && <Typography>Search User</Typography>}
           </Button>
         </Tooltip>
       </Box>

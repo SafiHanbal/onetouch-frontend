@@ -5,14 +5,13 @@ export const MessageBoxContainer = styled(Box)`
   background-color: var(--color-gray-light-1);
   border-radius: 2px;
   margin: 10px 0;
-  height: calc(100% - 46.5px);
-  height: calc(100vh - 210px);
+  height: calc(100vh - 166px);
   position: relative;
 `;
 
 export const MessageContainer = styled(ScrollableFeed)`
-  padding: 10px;
-  padding-right: 0;
+  padding: 10px 0 10px 10px;
+  height: calc(100% - 44px);
   overflow: scroll;
   /* width */
   &::-webkit-scrollbar {

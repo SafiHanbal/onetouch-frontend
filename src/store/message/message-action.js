@@ -30,16 +30,18 @@ export const sendMessageSuccess = (payload) =>
 export const sendMessageFailed = (payload) =>
   createAction(MESSAGE_ACTION_TYPES.SEND_MESSAGE_FAILED, payload);
 
-export const sendMessageAsync = (body) => async (dispatch) => {
-  dispatch(sendMessageStart());
-  try {
-    const data = await apiRequest('api/v1/message', API_REQ_TYPES.POST, body);
-    if (data.status !== 'success') throw new Error(data.message);
+export const sendMessageAsync =
+  (body, sendMessageSocket) => async (dispatch) => {
+    dispatch(sendMessageStart());
+    try {
+      const data = await apiRequest('api/v1/message', API_REQ_TYPES.POST, body);
+      if (data.status !== 'success') throw new Error(data.message);
 
-    const { message } = data.data;
-    dispatch(sendMessageSuccess());
-    dispatch(getAllMessagesAsync(message.chat._id));
-  } catch (err) {
-    dispatch(sendMessageFailed(err));
-  }
-};
+      const { message } = data.data;
+      dispatch(sendMessageSuccess());
+      sendMessageSocket(message);
+      dispatch(getAllMessagesAsync(message.chat._id));
+    } catch (err) {
+      dispatch(sendMessageFailed(err));
+    }
+  };

@@ -11,6 +11,10 @@ export const ModalContainer = styled(Box)`
   padding: 15px;
   border-radius: 2px;
   box-shadow: 0 4px 6px rgba(var(--color-black-rgb), 0.4);
+
+  @media only screen and (max-width: 500px) {
+    width: 300px;
+  }
 `;
 
 export const Heading = styled(Typography)`
